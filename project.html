@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Digital Thermometer</title>
+<meta http-equiv="refresh" content="10">
+<meta charset="utf-8"/>
+<style type="text/css">
+#body
+{
+overflow: hidden;
+margin-bottom: 0;
+position: fixed;
+}
+</style>
+</head>
+
+<body style="margin:0; padding:0">
+
+<div id="body">
+
+
+
+
+<canvas id="myCanvas" style="margin:0";>
+</canvas>
+<p id="demo"></p>
+<script type="text/javascript" src ="jquery-1.12.4.min.js"></script>
+<script>
+
+
+var str="30.0$$34.5$$40.0"
+var data = str.split("$$");
+
+
+var z = data[1];
+var mint = data[0];
+var maxt = data[2];
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.canvas.width  = window.innerWidth;
+ctx.canvas.height = window.innerHeight;
+
+
+ctx.clearRect(0,0,c.width,c.height);
+ctx.fillStyle="#202020";
+ctx.fillRect(0,0,c.width,c.height);
+
+
+ctx.beginPath();
+ctx.arc(c.width/2, c.height/2, 0.28*Math.min(window.innerHeight,window.innerWidth), 0, 2*Math.PI);
+ctx.closePath();
+ctx.strokeStyle="#828288";
+ctx.lineWidth = 5;
+ctx.stroke();
+
+
+ctx.beginPath();
+ctx.arc(c.width/2, c.height/2, 0.28*Math.min(window.innerHeight,window.innerWidth), 1.5*Math.PI, 1.5*Math.PI-z*2*Math.PI/100,true);
+ctx.strokeStyle="#FFFF00";
+ctx.lineWidth = 5;
+ctx.stroke();
+
+
+ctx.beginPath();
+ctx.arc(0.25*c.width, c.height/2, 0.16*Math.min(window.innerHeight,window.innerWidth), 0, 2*Math.PI);
+ctx.closePath();
+ctx.strokeStyle="#828288";
+ctx.lineWidth = 5;
+ctx.stroke();
+
+
+ctx.beginPath();
+ctx.arc(0.25*c.width, c.height/2, 0.16*Math.min(window.innerHeight,window.innerWidth), 1.5*Math.PI, 1.5*Math.PI-mint*2*Math.PI/100,true);
+ctx.strokeStyle="#FFFF00";
+ctx.lineWidth = 5;
+ctx.stroke();
+
+
+
+
+ctx.beginPath();
+ctx.arc(0.75*c.width, c.height/2, 0.16*Math.min(window.innerHeight,window.innerWidth), 0, 2*Math.PI);
+ctx.closePath();
+ctx.strokeStyle="#828288";
+ctx.lineWidth = 5;
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(0.75*c.width, c.height/2, 0.16*Math.min(window.innerHeight,window.innerWidth), 1.5*Math.PI, 1.5*Math.PI-mint*2*Math.PI/100,true);
+ctx.strokeStyle="#FFFF00";
+ctx.lineWidth = 5;
+ctx.stroke();
+
+
+
+
+var text = c.getContext("2d");
+text.font = getFont1();
+text.fillStyle = 'white';
+text.fillText(z+"°C",0.46*c.width,0.53*c.height);
+
+
+var text = c.getContext("2d");
+text.font = getFont2();
+text.fillStyle = "#828788";
+text.fillText("Real",0.48*c.width,0.45*c.height);
+
+
+
+var text = c.getContext("2d");
+text.font = getFont1();
+text.fillStyle = 'white';
+text.fillText(mint+"°C",0.21*c.width,0.53*c.height);
+
+
+var text = c.getContext("2d");
+text.font = getFont2();
+text.fillStyle = "#828788";
+text.fillText("Min",0.23*c.width,0.45*c.height);
+
+
+
+var text = c.getContext("2d");
+text.font = getFont1();
+text.fillStyle = 'white';
+text.fillText(maxt+"°C",0.71*c.width,0.53*c.height);
+
+
+var text = c.getContext("2d");
+text.font = getFont2();
+text.fillStyle = "#828788";
+text.fillText("Max",0.73*c.width,0.45*c.height);
+
+function getFont1()
+{
+	var size = Math.min(window.innerHeight,window.innerWidth)*0.06;
+	return (size|0) + 'px Roboto-BoldItalic';
+}
+
+function getFont2()
+{
+	var size = Math.min(window.innerHeight,window.innerWidth)*0.04;
+	return (size|0) + 'px Roboto-BoldItalic';
+}
+
+</script> 
+</div>
+</body>
+</html>
